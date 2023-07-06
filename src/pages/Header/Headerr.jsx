@@ -1,11 +1,22 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaHome,FaSistrix,FaRegCompass,FaRegPlusSquare } from "react-icons/fa";
 import { BiLogOut,BiUserCircle} from "react-icons/bi";
 import logo from '../../assets/logo/logo.png'
 import './Header.css'
-import CreatePostModal from "../CreatePostModal/CreatePostModal";
+import { useContext } from "react";
+import { AuthContext } from "../Contexts/AuthProvider";
+// import CreatePostModal from "../CreatePostModal/CreatePostModal";
 const Headerr = () => {
-   
+    const {logOut}=useContext(AuthContext);
+    const navigate=useNavigate();
+        const handelLogout = () => {
+        logOut()
+            .then(() => {
+                // console.log('hi')
+                navigate('/signUp')
+            })
+
+    }
     return (
         <nav
             className="fixed top-0 left-0 w-full h-full border-r bg-[rgba(255,255,255,255)] space-y-8 sm:w-80">
@@ -66,11 +77,11 @@ const Headerr = () => {
                             </div>
                             <NavLink className='text-lg'>Login/Signup</NavLink>
                         </div>
-                        <div className="flex justify-start items-center mt-4 mb-4">
+                        <div  onClick={handelLogout} className="cursor-pointer flex justify-start items-center mt-4 mb-4">
                             <div className="text-[20px] mr-2">
                               <BiLogOut></BiLogOut>
                             </div>
-                            <NavLink to='/search' className='text-lg'>Logout</NavLink>
+                            <a  className='text-lg'>Logout</a>
                         </div>
                     </div>
                         <div className="py-4 px-4 border-t">
