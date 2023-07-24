@@ -1,18 +1,23 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FaHome,FaSistrix,FaRegCompass,FaRegPlusSquare } from "react-icons/fa";
-import { BiLogOut,BiUserCircle} from "react-icons/bi";
+import { FaHome, FaSistrix, FaRegCompass, FaRegPlusSquare } from "react-icons/fa";
+import { BiLogOut, BiUserCircle } from "react-icons/bi";
 import logo from '../../assets/logo/logo.png'
+import userlogo from '../../assets/logo/images.png'
 import './Header.css'
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Contexts/AuthProvider";
+import { useQuery } from "react-query";
+import CreatePostModal from "../CreatePostModal/CreatePostModal";
+import SearchModal from "../SearchModal/SearchModal";
 // import CreatePostModal from "../CreatePostModal/CreatePostModal";
 const Headerr = () => {
-    const {logOut}=useContext(AuthContext);
-    const navigate=useNavigate();
-        const handelLogout = () => {
+    const [open, setOpen] = useState(null)
+    const { logOut, user } = useContext(AuthContext);
+    console.log(user);
+    const navigate = useNavigate();
+    const handelLogout = () => {
         logOut()
             .then(() => {
-                // console.log('hi')
                 navigate('/signUp')
             })
 
@@ -27,81 +32,83 @@ const Headerr = () => {
                     </a>
                 </div>
                 <div className="flex-1 flex flex-col h-full overflow-auto mt-4">
-                    {/* <ul className="px-4 text-sm font-medium flex-1">
-                    {
-                        navigation.map((item, idx) => (
-                            <li key={idx}>
-                                <a href={item.href} className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150">
-                                    <div className="text-gray-500">{item.icon}</div>
-                                    {item.name}
-                                </a>
-                            </li>
-                        ))
-                    }
-                </ul> */}
+
                     <div className="px-4 text-sm font-medium flex-1 mt-4 mb-4">
-                        <div className="flex justify-start items-center">
+                        <NavLink to='/' className="flex justify-start items-center">
                             <div className="text-[20px] mr-2">
-                              <FaHome></FaHome>
+                                <FaHome></FaHome>
                             </div>
-                            <NavLink className='text-lg'>Home</NavLink>
-                        </div>
+                            <NavLink to='/' className='text-lg cousor-pointer'>Home</NavLink>
+                        </NavLink>
+                        <label htmlFor="search-modal" className="flex justify-start items-center mt-4 mb-4">
+                            <div className="text-[20px] mr-2">
+                                <FaSistrix></FaSistrix>
+                            </div>
+                            <label htmlFor="search-modal" className='text-lg'>Search</label>
+                            <SearchModal></SearchModal>
+
+                        </label>
                         <div className="flex justify-start items-center mt-4 mb-4">
                             <div className="text-[20px] mr-2">
-                              <FaSistrix></FaSistrix>
-                            </div>
-                            <NavLink to='/search' className='text-lg'>Search</NavLink>
-                        </div>
-                        <div className="flex justify-start items-center mt-4 mb-4">
-                            <div className="text-[20px] mr-2">
-                              <FaRegCompass></FaRegCompass>
+                                <FaRegCompass></FaRegCompass>
                             </div>
                             <NavLink to='/explore' className='text-lg'>Explore</NavLink>
                         </div>
-                        <div  className="flex justify-start items-center mt-4 mb-4"  onClick={() => window.my_modal_1.showModal()}>
+                        <Link to="/createPost" className="flex justify-start items-center mt-4 mb-4" onClick={() => setOpen('open')}>
                             <div className="text-[20px] mr-2">
-                              <FaRegPlusSquare></FaRegPlusSquare>
+                                <FaRegPlusSquare></FaRegPlusSquare>
                             </div>
-                            <Link  className='text-lg'>Create</Link>
-                        </div>
+                            <label htmlFor="booking-modal" className='text-lg cursor-pointer'>Create</label>
+                           
+                        </Link>
                     </div>
 
                     <div>
                         {/* <ul className="px-4 pb-4 text-sm font-medium">
                             
                         </ul> */}
-                        <div className="px-4 text-sm font-medium flex-1 mt-4 mb-4">
-                        <div className="flex justify-start items-center">
-                            <div className="text-[20px] mr-2">
-                              <BiUserCircle></BiUserCircle>
-                            </div>
-                            <NavLink className='text-lg'>Login/Signup</NavLink>
-                        </div>
-                        <div  onClick={handelLogout} className="cursor-pointer flex justify-start items-center mt-4 mb-4">
-                            <div className="text-[20px] mr-2">
-                              <BiLogOut></BiLogOut>
-                            </div>
-                            <a  className='text-lg'>Logout</a>
-                        </div>
-                    </div>
-                        <div className="py-4 px-4 border-t">
-                            <div className="flex items-center gap-x-4">
-                                <img src="https://randomuser.me/api/portraits/women/79.jpg" className="w-12 h-12 rounded-full" />
-                                <div>
-                                    <span className="block text-gray-700 text-sm font-semibold">Alivika tony</span>
-                                    <a
-                                        href="javascript:void(0)"
-                                        className="block mt-px text-gray-600 hover:text-indigo-600 text-xs"
-                                    >
-                                        View profile
-                                    </a>
+                        {
+                            user?.uid ? <div className="px-4 text-sm font-medium flex-1 mt-4 mb-4">
+
+                                <div onClick={handelLogout} className="cursor-pointer flex justify-start items-center mt-4 mb-4">
+                                    <div className="text-[20px] mr-2">
+                                        <BiLogOut></BiLogOut>
+                                    </div>
+                                    <a className='text-lg'>Logout</a>
+                                </div>
+                            </div> : <div className="px-4 text-sm font-medium flex-1 mt-4 mb-4">
+                                <div className="flex justify-start items-center">
+                                    <div className="text-[20px] mr-2">
+                                        <BiUserCircle></BiUserCircle>
+                                    </div>
+                                    <NavLink to='/login' className='text-lg cursor-pointer'>Login</NavLink>/<NavLink to='/signUp' className='text-lg cursor-pointer'>Signup</NavLink>
                                 </div>
                             </div>
-                        </div>
+                        }
+                        {
+                            user?.uid ? <div className="py-4 px-4 border-t">
+                                <Link to={`/myProfile/${user?.email}`} className="flex items-center gap-x-4">
+
+                                    <img src={user?.photoURL} className="w-12 h-12 rounded-full" />
+                                    <div>
+                                        <span className="block text-gray-700 text-sm font-semibold">{
+                                            user?.displayName
+                                        }</span>
+                                        <a
+                                            href="javascript:void(0)"
+                                            className="block mt-px text-gray-600 hover:text-indigo-600 text-xs"
+                                        >
+                                            View profile
+                                        </a>
+                                    </div>
+                                </Link>
+                            </div> : <></>
+                        }
+
                     </div>
                 </div >
             </div>
-    
+
         </nav>
     );
 };

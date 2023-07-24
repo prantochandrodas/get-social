@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import logo from '../../assets/logo/logo.png';
 const Signup = () => {
-    // console.log(import.meta.env.VITE_apiKey,import.meta.env.VITE_authDomain,import.meta.env.VITE_appId,import.meta.env.VITE_messagingSenderId,import.meta.env.VITE_storageBucket)
     const { createUser, userUpdata } = useContext(AuthContext);
     const navigate = useNavigate();
     const [loading, SetLoading] = useState(false);
@@ -15,38 +14,56 @@ const Signup = () => {
     const handelSignUp = (data) => {
         setSignUpError('')
         SetLoading(true);
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                if (user?.uid) {
+                    const image = data.photo[0];
+                    const formData = new FormData();
+                    formData.append("image", image);
+                    const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`;
+                    fetch(url, {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(res => res.json())
+                        .then(imageData => {
+                            console.log(imageData.url);
+                            
+                            const info = {
+                                displayName: data.name,
+                                photoURL: imageData.data.url,
+                            }
+                            console.log(info);
+                            userUpdata(info)
+                                .then(() => { })
+                                .catch(error => console.log(error))
 
-        const image = data.photo[0];
-        const formData = new FormData();
-        formData.append("image", image);
-        const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imgHostKey}`;
-        fetch(url, {
-            method: 'POST',
-            body: formData
-        })
-            .then(res => res.json())
-            .then(imageData => {
-                console.log(imageData);
-                if (imageData.success) {
-
-                    const userInfo = {
-                        password: data.password,
-                        name: data.name,
-                        photoURL: imageData.data.url,
-                        email: data.email
-                    }
-                    saveUser(userInfo)
+                            if (imageData.success) {
+                                const userInfo = {
+                                    password: data.password,
+                                    name: data.name,
+                                    photoURL: imageData.data.url,
+                                    email: data.email
+                                }
+                                saveUser(userInfo)
+                            }
+                        })
                 }
+                SetLoading(false);
             })
-
+            .catch(err => {
+                setSignUpError(err);
+                SetLoading(false);
+            })
     }
     const saveUser = (userInfo) => {
         const user = {
             name: userInfo.name,
-            email: userInfo.email,
-            photo: userInfo.photoURL
+            email: userInfo?.email,
+            photo: userInfo?.photoURL
         }
-        console.log(user)
         fetch('http://localhost:5000/addUser', {
             method: 'POST',
             headers: {
@@ -60,20 +77,24 @@ const Signup = () => {
                     setSignUpError('User name or email already exist')
                     SetLoading(false);
                 } else {
-                    console.log(userInfo.email, userInfo.password)
-                    createUser(userInfo.email, userInfo.password)
-                        .then(result => {
-                            const user = result.user;
-                            console.log(user);
-                            navigate('/');
-                            SetLoading(false);
-                        })
-                        .catch(err => {
-                            setSignUpError(err);
-                            // navigate('/');
-                            SetLoading(false);
-                        })
-
+                    const currentUser = {
+                        email: userInfo.email
+                    }
+                    console.log(currentUser)
+                    fetch('https://house-hunter-server-eta.vercel.app/jwt', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(currentUser)
+                    })
+                    .then(res => res.json())
+                    .then(newData=>{
+                        localStorage.setItem('token', newData.token)
+                        SetLoading(false);
+                        navigate('/')
+                    })
+                    navigate('/');
                 }
             })
     }

@@ -8,6 +8,9 @@ const auth=getAuth(app);
 const AuthProvider = ({children}) => {
     const [user,SetUser]=useState(null);
     const [loading,setLoading]=useState(true);
+    const [searchData,setSearchData]=useState('');
+    const [searchModal,setSearchModal]=useState(null);
+    
     
     //    signUp 
     const createUser=(email,password)=>{
@@ -31,10 +34,12 @@ const AuthProvider = ({children}) => {
        return signOut(auth);
     }
     // update user
-    const userUpdata=(userInfo)=>{
-        setLoading(true);
-       return updateProfile(auth.currentUser,userInfo)
+    const userUpdata=(info)=>{
+       
+       return updateProfile(auth.currentUser,info)
     }
+
+    
     useEffect(()=>{
       const unSubscribe=  onAuthStateChanged(auth,currentUser=>{
             SetUser(currentUser);
@@ -50,7 +55,11 @@ const AuthProvider = ({children}) => {
         loading,
         userUpdata,
         setLoading,
-        createUserWithGoogle
+        setSearchData,
+        searchData,
+        createUserWithGoogle,
+        setSearchModal,
+        searchModal
     }
  
     return (

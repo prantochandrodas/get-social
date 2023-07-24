@@ -3,7 +3,7 @@ import './CommentModal.css'
 import { useLoaderData } from 'react-router-dom';
 import { useQuery } from 'react-query';
 const CommentModal = ({ postData }) => {
-
+    console.log(postData)
     return (
         <div>
             <div>
@@ -21,7 +21,7 @@ const CommentModal = ({ postData }) => {
                                             <img src="https://scontent.fdac5-1.fna.fbcdn.net/v/t39.30808-6/336661600_1216684852376202_341076738624413469_n.jpg?stp=dst-jpg_p843x403&_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeFS2Kjdatg9UhTyH1A4OmYznybJ17l_DOqfJsnXuX8M6jJE_pIceqZJ74nNpXmx5pkot53LwBEXgywgvbhFN17O&_nc_ohc=durDZVA6JusAX_cLULJ&_nc_ht=scontent.fdac5-1.fna&oh=00_AfCxVavDbHM5rkppn2wfi6aR8Psa4UbRQ_uQRX1L_uDUWg&oe=64A67B3B" />
                                         </div>
                                     </div>
-                                    <p className='ml-4 font-semibold text-xl'>Pranto Das</p>
+                                    <p className='ml-4 font-semibold text-xl'>{postData?.userName}</p>
                                     <p className='ml-2'>{postData?.about}</p>
                                 </div>
                                 {

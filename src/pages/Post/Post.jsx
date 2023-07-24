@@ -1,49 +1,61 @@
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaRegHeart, FaRegComment } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FcLike } from "react-icons/fc";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Contexts/AuthProvider";
 // import PostLike from "../PostLike/PostLike";
 const Post = ({ post, addLike, disLike, addComment, setPostData }) => {
-
+    const { user } = useContext(AuthContext);
     return (
-        <div className="mb-8 w-[500px]">
-            <div className="flex items-center mb-4">
+        <div className="mb-8 lg:w-[500px] w-full">
+            <Link to={`/myProfile/${post?.email}`} className="flex items-center mb-4">
                 <div className="avatar">
                     <div className="w-12 rounded-full">
-                        <img src="https://scontent.fdac5-1.fna.fbcdn.net/v/t39.30808-6/336661600_1216684852376202_341076738624413469_n.jpg?stp=dst-jpg_p843x403&_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeFS2Kjdatg9UhTyH1A4OmYznybJ17l_DOqfJsnXuX8M6jJE_pIceqZJ74nNpXmx5pkot53LwBEXgywgvbhFN17O&_nc_ohc=durDZVA6JusAX_cLULJ&_nc_ht=scontent.fdac5-1.fna&oh=00_AfCxVavDbHM5rkppn2wfi6aR8Psa4UbRQ_uQRX1L_uDUWg&oe=64A67B3B" />
+                        <img src={post?.userImage} />
                     </div>
                 </div>
-                <h1 className="font-semibold text-md ml-4">Pranto Das</h1>
-            </div>
+                <h1 className="font-semibold text-md ml-4">{post?.userName}</h1>
+            </Link>
             <div className="ml-2">
                 {
                     post?.about ? <p className="text-[14px] my-4">{post.about}</p> : <></>
                 }
             </div>
             {
-                post?.photoURL ? <img className="mb-4" src={post?.photoURL} width={500} alt="" /> : <></>
+                post?.photoURL ? <img className="mb-4 lg:w-[500px] w-full" src={post?.photoURL} alt="" /> : <></>
             }
-            <div className="flex items-center mb-4">
-                {
-                    post?.liked.includes('prantodas@gmail.com') ? <div onClick={() => disLike(post?._id)} className="text-[25px]">
-                        <FcLike></FcLike>
-                    </div> : <div onClick={() => addLike(post?._id)} className="text-[25px]">
-                        <AiOutlineHeart></AiOutlineHeart>
+            {
+                post?.liked?.length > 0 ? <p>{post?.liked?.length} peopel liked this post</p> : <></>
+            }
+
+            {/* if user exist  */}
+            {
+                user?.email ? <div className="flex items-center mb-4">
+                    {
+                        post?.liked.includes(user?.email) ? <div onClick={() => disLike(post?._id)} className="text-[25px]">
+                            <FcLike></FcLike>
+                        </div> : <div onClick={() => addLike(post?._id)} className="text-[25px]">
+                            <AiOutlineHeart></AiOutlineHeart>
+                        </div>
+                    }
+
+
+                    <div className="text-[25px] ml-4">
+                        <FaRegComment></FaRegComment>
                     </div>
-                }
+                </div> : <></>
+            }
 
+            {
+                post?.comment.length > 0 ? <p>There {post?.comment.length} is comments </p> : <></>
+            }
+            <label htmlFor="comment-modal" onClick={() => setPostData(post)} className="font-bold text-md cursor-pointer">View Comments</label>
 
-                <div className="text-[25px] ml-4">
-                    <FaRegComment></FaRegComment>
-                </div>
-            </div>
-
-            <label htmlFor="comment-modal" onClick={() => setPostData(post)} className="text-md cursor-pointer">View Comments</label>
-
-            <form onSubmit={addComment}>
+            {
+                user?.email? <form onSubmit={addComment}>
                 <input type="hidden" name="id" value={post?._id} />
                 <input type="hidden" name="image" value={post?.photoURL} />
                 <label
@@ -65,7 +77,9 @@ const Post = ({ post, addLike, disLike, addComment, setPostData }) => {
                     <input type="Submit" value='Post' className="float-right text-[#3578E5] font-semibold" />
                 </label>
 
-            </form>
+            </form>:<></>
+            }
+           
 
             <hr />
         </div>
