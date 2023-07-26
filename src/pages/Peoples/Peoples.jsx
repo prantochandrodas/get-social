@@ -8,14 +8,14 @@ const Peoples = () => {
     const { data: getAllUser = [], isLoading, refetch } = useQuery({
         queryKey: ['getAllUser'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/getAllUser`);
+            const res = await fetch(`https://get-social-server.vercel.app/getAllUser`);
             const data = await res.json();
             return data;
         }
     });
 
     const addFollower = (data) => {
-        fetch(`http://localhost:5000/follower?id=${data._id}&&email=${user?.email}`, {
+        fetch(`https://get-social-server.vercel.app/follower?id=${data._id}&&email=${user?.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -30,7 +30,7 @@ const Peoples = () => {
     }
 
     const unFollow = (data) => {
-        fetch(`http://localhost:5000/unFollow?id=${data._id}&&email=${user.email}`, {
+        fetch(`https://get-social-server.vercel.app/unFollow?id=${data._id}&&email=${user.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

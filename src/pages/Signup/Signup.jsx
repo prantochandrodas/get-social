@@ -64,7 +64,7 @@ const Signup = () => {
             email: userInfo?.email,
             photo: userInfo?.photoURL
         }
-        fetch('http://localhost:5000/addUser', {
+        fetch('https://get-social-server.vercel.app/addUser', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

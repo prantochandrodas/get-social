@@ -42,7 +42,7 @@ const MobileCreatePost = () => {
                                 comment: [],
                                 date: new Date(Date.now()).toLocaleString().split(',')[0] 
                             }
-                            fetch('http://localhost:5000/post', {
+                            fetch('https://get-social-server.vercel.app/post', {
                                 method: 'POST',
                                 headers: {
                                     'content-type': 'application/json'
@@ -71,7 +71,7 @@ const MobileCreatePost = () => {
                                 date: new Date(Date.now()).toLocaleString().split(',')[0],
                             }
 
-                            fetch('http://localhost:5000/post', {
+                            fetch('https://get-social-server.vercel.app/post', {
                                 method: 'POST',
                                 headers: {
                                     'content-type': 'application/json'
@@ -101,7 +101,7 @@ const MobileCreatePost = () => {
                 comment: [],
                 date: new Date(Date.now()).toLocaleString().split(',')[0] 
             }
-            fetch('http://localhost:5000/post', {
+            fetch('https://get-social-server.vercel.app/post', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

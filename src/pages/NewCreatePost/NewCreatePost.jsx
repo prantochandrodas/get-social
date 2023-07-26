@@ -31,7 +31,7 @@ const NewCreatePost = () => {
             }
 
 
-            fetch('http://localhost:5000/post', {
+            fetch('https://get-social-server.vercel.app/post', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -80,7 +80,7 @@ const NewCreatePost = () => {
                         }
                         console.log(postInfo)
 
-                        fetch('http://localhost:5000/post', {
+                        fetch('https://get-social-server.vercel.app/post', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
@@ -109,7 +109,7 @@ const NewCreatePost = () => {
                         }
                         console.log(postInfo)
 
-                        fetch('http://localhost:5000/post', {
+                        fetch('https://get-social-server.vercel.app/post', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'

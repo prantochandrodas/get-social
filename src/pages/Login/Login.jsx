@@ -42,7 +42,7 @@ const Login = () => {
                     email: user.email,
                     photo: user.photoURL
                 }
-                fetch('http://localhost:5000/addGoogleUser', {
+                fetch('https://get-social-server.vercel.app/addGoogleUser', {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'

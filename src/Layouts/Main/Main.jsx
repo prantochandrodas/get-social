@@ -18,7 +18,7 @@ const Main = () => {
 
                
                 <Outlet></Outlet>
-              <div className=" h-full bottom-0 right-0 left-0">
+              <div className="fixed bottom-0 right-0 left-0">
                   <MobileNav></MobileNav>
               </div>
             </div>

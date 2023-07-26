@@ -10,8 +10,8 @@ import { AuthContext } from "../Contexts/AuthProvider";
 const Post = ({ post, addLike, disLike, addComment, setPostData }) => {
     const { user } = useContext(AuthContext);
     return (
-        <div className="mb-8 lg:w-[500px] w-full">
-            <Link to={`/myProfile/${post?.email}`} className="flex items-center mb-4">
+        <div className="mb-8 lg:w-[500px] w-full my-4 bg-white">
+            <Link to={`/myProfile/${post?.email}`} className="flex items-center mb-4 pl-4 pt-4">
                 <div className="avatar">
                     <div className="w-12 rounded-full">
                         <img src={post?.userImage} />
@@ -19,7 +19,7 @@ const Post = ({ post, addLike, disLike, addComment, setPostData }) => {
                 </div>
                 <h1 className="font-semibold text-md ml-4">{post?.userName}</h1>
             </Link>
-            <div className="ml-2">
+            <div className="ml-2 pl-4">
                 {
                     post?.about ? <p className="text-[14px] my-4">{post.about}</p> : <></>
                 }
@@ -33,7 +33,7 @@ const Post = ({ post, addLike, disLike, addComment, setPostData }) => {
 
             {/* if user exist  */}
             {
-                user?.email ? <div className="flex items-center mb-4">
+                user?.email ? <div className="flex items-center mb-4 pl-4">
                     {
                         post?.liked.includes(user?.email) ? <div onClick={() => disLike(post?._id)} className="text-[25px]">
                             <FcLike></FcLike>
@@ -50,17 +50,17 @@ const Post = ({ post, addLike, disLike, addComment, setPostData }) => {
             }
 
             {
-                post?.comment.length > 0 ? <p>There {post?.comment.length} is comments </p> : <></>
+                post?.comment.length > 0 ? <p className="pl-4">There {post?.comment.length} is comments </p> : <></>
             }
-            <label htmlFor="comment-modal" onClick={() => setPostData(post)} className="font-bold text-md cursor-pointer">View Comments</label>
+            <label htmlFor="comment-modal" onClick={() => setPostData(post)} className="pl-4 font-bold text-md cursor-pointer pl-4">View Comments</label>
 
             {
-                user?.email? <form onSubmit={addComment}>
+                user?.email? <form onSubmit={addComment} className="px-4">
                 <input type="hidden" name="id" value={post?._id} />
                 <input type="hidden" name="image" value={post?.photoURL} />
                 <label
                     htmlFor="UserEmail"
-                    className="relative flex overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+                    className=" relative flex overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                 >
                     <input
                         type="text"

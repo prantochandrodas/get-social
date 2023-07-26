@@ -15,7 +15,7 @@ const SingelPost = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/user`);
+            const res = await fetch(`https://get-social-server.vercel.app/user`);
             const data = await res.json();
             return data;
         }
@@ -35,7 +35,7 @@ const SingelPost = () => {
             image: image,
         }
         // form.reset();
-        fetch(`http://localhost:5000/comment?id=${id}`, {
+        fetch(`https://get-social-server.vercel.app/comment?id=${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -50,7 +50,7 @@ const SingelPost = () => {
     }
 
     const addLike = (id) => {
-        fetch(`http://localhost:5000/like?id=${id}&&email=${user?.email}`, {
+        fetch(`https://get-social-server.vercel.app/like?id=${id}&&email=${user?.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -65,7 +65,7 @@ const SingelPost = () => {
     }
 
     const disLike = (id) => {
-        fetch(`http://localhost:5000/dislike?id=${id}&&email=${user?.email}`, {
+        fetch(`https://get-social-server.vercel.app/dislike?id=${id}&&email=${user?.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

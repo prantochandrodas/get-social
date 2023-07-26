@@ -24,7 +24,7 @@ const Headerr = () => {
     }
     return (
         <nav
-            className="fixed top-0 left-0 w-full h-full border-r bg-[rgba(255,255,255,255)] space-y-8 sm:w-80">
+            className="fixed top-0 left-0 w-full h-full border-r bg-[#e1e1e1] space-y-8 sm:w-80">
             <div className="flex flex-col h-full">
                 <div className='h-20 flex items-center pr-8'>
                     <a href='javascript:void(0)' className='flex-none'>
@@ -48,12 +48,12 @@ const Headerr = () => {
                             <SearchModal></SearchModal>
 
                         </label>
-                        <div className="flex justify-start items-center mt-4 mb-4">
+                        <Link to='/' className="flex justify-start items-center mt-4 mb-4">
                             <div className="text-[20px] mr-2">
                                 <FaRegCompass></FaRegCompass>
                             </div>
-                            <NavLink to='/explore' className='text-lg'>Explore</NavLink>
-                        </div>
+                            <NavLink to='/' className='text-lg'>Explore</NavLink>
+                        </Link>
                         <Link to="/createPost" className="flex justify-start items-center mt-4 mb-4" onClick={() => setOpen('open')}>
                             <div className="text-[20px] mr-2">
                                 <FaRegPlusSquare></FaRegPlusSquare>

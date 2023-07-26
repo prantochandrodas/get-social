@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: '/getComment/:id',
         element: <CommentModal></CommentModal>,
-        loader: ({ params }) => fetch(`http://localhost:5000/getComment/${params.id}`)
+        loader: ({ params }) => fetch(`https://get-social-server.vercel.app/getComment/${params.id}`)
       },
       {
         path: '/about',
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
       {
         path:'myProfile/:email',
         element:<MyProfile></MyProfile>,
-        loader: ({ params }) => fetch(`http://localhost:5000/myProfile/${params.email}`)
+        loader: ({ params }) => fetch(`https://get-social-server.vercel.app/myProfile/${params.email}`)
       }
     ]
   },
@@ -80,12 +80,12 @@ const router = createBrowserRouter([
   {
     path:'/search/:text',
     element:<SearchLayout></SearchLayout>,
-    loader: ({ params }) => fetch(`http://localhost:5000/search/${params.text}`)
+    loader: ({ params }) => fetch(`https://get-social-server.vercel.app/search/${params.text}`)
   },
   {
     path:'/myProfile/post/:id',
     element:<SingelPost></SingelPost>,
-    loader:({params})=>fetch(`http://localhost:5000/myProfile/post/${params.id}`)
+    loader:({params})=>fetch(`https://get-social-server.vercel.app/myProfile/post/${params.id}`)
   },
   {
     path: '/signUp',
