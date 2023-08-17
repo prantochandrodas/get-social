@@ -16,7 +16,7 @@ const CreatePost = () => {
         return <Loading></Loading>
     }
     return (
-        <div className=" bg-white p-4 lg:w-[500px] ">
+        <div className="sticky top-0 bg-white p-4 lg:w-[500px] ">
             <div className="flex lg:justify-start justify-center items-center mb-4 cursor-pointer">
                 <Link to={`/myProfile/${user?.email}`} className="avatar">
                     <div className="w-12 rounded-full">

@@ -24,7 +24,7 @@ const Headerr = () => {
     }
     return (
         <nav
-            className="fixed top-0 left-0 w-full h-full border-r bg-[#e1e1e1] space-y-8 sm:w-80">
+            className="fixed top-0 left-0 w-full h-full border-r bg-[#ffffff] space-y-8 sm:w-80">
             <div className="flex flex-col h-full">
                 <div className='h-20 flex items-center pr-8'>
                     <a href='javascript:void(0)' className='flex-none'>

@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import People from "../People/People";
 import { useContext } from "react";
 import { AuthContext } from "../Contexts/AuthProvider";
+import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
 
 const Peoples = () => {
     const {user}=useContext(AuthContext);
@@ -43,7 +44,8 @@ const Peoples = () => {
             })
     }
     return (
-        <div className="mt-10 font sticky">
+        <div className="bg-[#ffffff] font fixed rounded-xl  lg:pr-20 lg:pl-4 lg:py-4">
+           
             <h1>Suggested for you</h1>
         
             {

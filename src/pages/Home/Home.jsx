@@ -12,9 +12,11 @@ const Home = () => {
         <div className="flex">
             <div className="bgcolor lg:pl-[60px] lg:pr-[20px]">
                 <CreatePost></CreatePost>
-                <Posts></Posts>
+              <div className="static">
+              <Posts></Posts>
+              </div>
             </div>
-            <div className="w-[220px]  top-0 right-0 hidden lg:block">
+            <div className="w-full  top-0 right-0 hidden lg:block">
                 <Peoples></Peoples>
             </div>
         </div>

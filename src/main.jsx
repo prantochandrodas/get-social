@@ -27,6 +27,7 @@ import SingelPost from './pages/SingelPost/SingelPost';
 import PrivetRoute from './pages/PrivetRoute/PrivetRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DarkModeToggle from './pages/DarkModeToggle/DarkModeToggle';
 // Create a client
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
