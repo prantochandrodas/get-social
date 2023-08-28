@@ -115,7 +115,7 @@ const SingelPost = () => {
                     </div>
                 </div> */}
                 {
-                    data?.comment.length > 0 ? <p>There {data?.comment.length} is comments </p> : <></>
+                    data?.comment?.length > 0 ? <p>There {data?.comment?.length} is comments </p> : <></>
                 }
                 <label htmlFor="comment-modal" onClick={() => setPostData(data)} className="font-bold text-md cursor-pointer">View Comments</label>
                 <hr />

@@ -5,13 +5,14 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 import './MyProfile.css'
 import Loading from '../Loading/Loading';
 import { Link, useLoaderData } from 'react-router-dom';
+import Post from '../Post/Post';
 const MyProfile = () => {
     const { user } = useContext(AuthContext);
     const myPost = useLoaderData();
-    console.log(myPost[1]);
+    console.log(myPost[0]);
     return (
-        <div className='h-full min-h-screen'>
-            <div className='p-4 flex items-center '>
+        <div className='h-full min-h-screen lg:w-[50%] mx-auto '>
+            <div className='p-4 flex items-center bg-white lg:w-[450px] lg:ml-4 rounded-xl'>
                 <div className='flex flex-col items-center'>
                     <div className="avatar">
                         <div className="w-[100px] rounded-full">
@@ -30,14 +31,15 @@ const MyProfile = () => {
                 </div>
 
             </div>
-            <div className='lg:p-4 grid lg:grid-cols-4 grid-cols-3'>
+            <div className='lg:p-4 '>
                 {
-                    myPost[0]?.map(data => <div key={data._id} className={`${data.photoURL == undefined ? 'hidden' : ''}`}>
-
-                        <Link to={`/myProfile/post/${data._id}`}> <img src={data.photoURL} className='cursor-pointer w-full h-[150px] lg:w-[200px] lg:h-[250px] ' alt="" /></Link>
-
-                    </div>)
+                    myPost[0]?.map(data => <Post
+                        key={data._id}
+                        post={data}
+                    ></Post>)
                 }
+
+              
             </div>
         </div>
     );

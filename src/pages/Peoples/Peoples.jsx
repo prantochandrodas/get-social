@@ -44,7 +44,7 @@ const Peoples = () => {
             })
     }
     return (
-        <div className="bg-[#ffffff] font fixed rounded-xl  lg:pr-20 lg:pl-4 lg:py-4">
+        <div className="bg-[#ffffff] font fixed rounded-xl w-[300px] lg:mr-10  lg:pr-20 lg:pl-4 lg:py-4">
            
             <h1>Suggested for you</h1>
         

@@ -11,11 +11,11 @@ const SearchLayout = () => {
     // console.log(postSerch, userDatas)
     return (
         <div>
-            <div className='flex jusify-between'>
+            <div className=''>
                 <div className='hidden lg:block w-[320px]'>
                     <Headerr></Headerr>
                 </div>
-                <div className='px-[200px] hidden lg:block'>
+                <div className='px-[200px] pt-[100px] hidden lg:block'>
                     <Search
                         postSerch={postSerch}
                         userDatas={userDatas}

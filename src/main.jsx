@@ -28,6 +28,7 @@ import PrivetRoute from './pages/PrivetRoute/PrivetRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DarkModeToggle from './pages/DarkModeToggle/DarkModeToggle';
+import UserInfoModal from './pages/Posts/UserInfoModal/UserInfoModal';
 // Create a client
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path:'/createPost',
         element:<PrivetRoute><NewCreatePost></NewCreatePost></PrivetRoute> 
+      },
+      {
+        path:'/addUserInfo',
+        element:<PrivetRoute><UserInfoModal></UserInfoModal></PrivetRoute> 
       },
       {
         path:'myProfile/:email',

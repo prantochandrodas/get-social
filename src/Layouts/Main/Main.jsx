@@ -6,12 +6,13 @@ import MobileNav from "../../pages/MobileNav/MobileNav";
 const Main = () => {
     return (
         <div>
-            <div className="lg:flex justify-start hidden lg:block">
+            <div className=" hidden lg:block">
 
-                <div className="w-[320px] ">
+     
                     <Headerr></Headerr>
-                </div>
-                <Outlet></Outlet>
+               <div className="pt-[100px]">
+               <Outlet></Outlet>
+               </div>
                
             </div>
             <div className="lg:hidden">
